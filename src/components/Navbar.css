@@ -1,0 +1,77 @@
+/* Navbar.css */
+
+.navbar {
+    background-color: #c5380d;
+    color: white;
+    padding: 10px 20px;
+    position: relative;
+    /* width: 94vw; */
+    margin-bottom: 1vh;
+    /* top: 0; */
+    /* left: 0; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    margin: 0 auto;
+    width: 100%;
+}
+
+.navbar-logo:hover{
+    cursor: pointer;
+}
+
+.navbar-logo h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-options{
+    display: flex;
+    flex-direction: row;
+    float: left;
+    align-items: center;
+}
+
+.navbar-menu {
+    list-style: none;
+    margin: 0 2%;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-menu li {
+    display: inline;
+}
+
+.navbar-menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.navbar-menu a:hover {
+    color: #ffe0b2; /* Light color on hover */
+}
+
+.navbar-button {
+    background-color: #ffffff;
+    color: #ff5722;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.navbar-button:hover {
+    background-color: #ffe0b2; /* Light color on hover */
+}
