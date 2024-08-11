@@ -29,16 +29,15 @@ body{
 
 .restaurant-list {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   gap: 20px;
   justify-content: center;
+  padding: 0 1%;
 }
 
 .restaurant-header{
-  width: 98%;
+  width: 100%;
   display: flex;
-  padding: 0 1%;
   justify-content: space-between;
   align-items: center;
 }
@@ -96,9 +95,22 @@ body{
   padding: 15px;
 }
 
+.restaurant-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .restaurant-info h2 {
+  font-size: 1.4em;
+  margin: 0;
+  font-weight: 600;
+}
+
+.restaurant-info .restaurant-rating {
   font-size: 1.2em;
-  margin: 0 0 10px;
+  color: #ff5722;
+  font-weight: bold;
 }
 
 .restaurant-info p {
@@ -106,6 +118,13 @@ body{
   color: #555;
 }
 
+.restaurant-info-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9em;
+  color: #777;
+}
 
 .pagination {
   display: flex;
@@ -132,4 +151,8 @@ body{
 
 .pagination span {
   font-size: 16px;
+}
+
+.fontAwesomeIcon{
+  margin: 0 5px;
 }
