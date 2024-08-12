@@ -9,6 +9,7 @@ import { faMapLocationDot, faRoute, faStar, faLocationCrosshairs } from '@fortaw
 
 const RestaurantList = () => {
     const [restaurants, setRestaurants] = useState([]);
+    const [isMenuOpen, setMenuOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [limit, setLimit] = useState(12);
     const [totalPages, setTotalPages] = useState(1);
@@ -143,6 +144,10 @@ const RestaurantList = () => {
         }
     };
 
+    const handleFilterButtonClick = () => {
+        setMenuOpen(!isMenuOpen);
+    };
+
     const handleImageUpload = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -198,54 +203,59 @@ const RestaurantList = () => {
         <div className="restaurant-list">
             <div className='restaurant-header'>
                 <p className='restaurant-header-h1'>Hot Restaurants in your Area</p>
+                <button className="filter-button" onClick={handleFilterButtonClick}>Filter</button>
+            </div>
+            {/* Sliding side menu */}
+            <div className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
+                <h2 className="filter-title">Filters</h2>
+                <button className="close-menu" onClick={handleFilterButtonClick}>&times;</button>
                 <div className='restaurant-header-options'>
-                    <select onChange={handleLocationChange}>
-                        {locationOptions.map(option => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
-                    <button onClick={LocationSet}><FontAwesomeIcon icon={faLocationCrosshairs} /></button>
-
+                    <div className='LocationFilters'>
+                        <select onChange={handleLocationChange}>
+                            {locationOptions.map(option => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
+                        <button onClick={LocationSet}><FontAwesomeIcon icon={faLocationCrosshairs} /></button>
+                    </div>
+                    <div className="range-slider">
+                        <label>
+                            Distance: {range / 1000} km
+                            <input 
+                                type="range" 
+                                min="1000" 
+                                max="300000" 
+                                step="1000" 
+                                value={range} 
+                                onChange={(e) => setRange(e.target.value)} 
+                            />
+                        </label>
+                    </div>
                     {/* form to take inputs for name search, average spend, country */}
                     <form onSubmit={handleFilterSearch}>
                         <input type="text" placeholder="Search by name" name='nameSearch' />
                         <input type="text" placeholder="Average Cost for two" name="avgCost" />
                         <input type="text" placeholder="Country" name="country" />
                         {/* select multiple cuisines with search with checkbox and searchbar */}
-                        
                         <button>Search</button>
                     </form>
-                    
-
-                    <button>Sort by</button>
-                    <button>Filter</button>     
+                
                     {/* create a form to take an input image from the user and send to backend */}
                     <form onSubmit={handleImageUpload} method="post" encType="multipart/form-data">
                         <input type="file" name="file" />
                         <input type="hidden" name="page" value={currentPage} />
                         <input type="hidden" name="limit" value={limit} />
-                        <input type="default" name="latitude" value={userLocation?.lat} />
+                        <input type="hidden" name="latitude" value={userLocation?.lat} />
                         <input type="hidden" name="longitude" value={userLocation?.lon} />
                         <input type="hidden" name="range" value={100000000} />
                         <button type="submit">Upload</button>
                     </form>
-                </div>
-                <div className="range-slider">
-                    <label>
-                        Distance: {range / 1000} km
-                        <input 
-                            type="range" 
-                            min="1000" 
-                            max="300000" 
-                            step="1000" 
-                            value={range} 
-                            onChange={(e) => setRange(e.target.value)} 
-                        />
-                    </label>
-                </div>
+                </div>                
             </div>
+            <div className={`overlay ${isMenuOpen ? 'show' : ''}`} onClick={handleFilterButtonClick}></div>
+
             <div className='restaurants-lists'>
                 {restaurants.map(restaurant => (
                     <div className="restaurant-card" key={restaurant._id} onClick={() => handleCardClick(restaurant._id)}>
